@@ -43,9 +43,7 @@ METRIC_SNAPSHOT_HOUR=8
 
 4. Open `reports/index.html` in your browser to view the dashboard.
 
-## 🛠 Technologies Used
-- [The Graph](https://thegraph.com)
-- Python 3.x
-- Requests, dotenv
-- HTML5 + CSS for the dashboard
-- Data sorting and light/dark theming via vanilla JavaScript
+## 📊 Powered By
+- 🧠 [The Graph](https://thegraph.com)
+- 🧩 Python 3.x, HTML5 + CSS 
+- ⚙️ Data sorting and light/dark theming via vanilla JavaScript
