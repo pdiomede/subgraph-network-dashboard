@@ -1,6 +1,10 @@
 # Network Subgraph Metrics Dashboard
-
 This Python project generates a dashboard and CSV report that show how many subgraphs are deployed per network on [The Graph Network](https://thegraph.com). It includes time-based metrics, daily snapshots, and a modern, responsive HTML interface.
+
+**Live Dashboard:**  
+🔗 [graphtools.pro/network](https://graphtools.pro/network)
+
+🧪 This dashboard is part of [**Graph Tools Pro**](https://graphtools.pro), a community-driven initiative to provide useful, independent analytics tools for The Graph ecosystem.
 
 ---
 
