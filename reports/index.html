@@ -1,0 +1,1000 @@
+
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Explore a real-time dashboard showing the number of subgraphs published on The Graph Network across supported blockchain networks.">
+        <meta name="robots" content="index, follow">
+
+        <meta property="og:title" content="Graph Tools Pro :: Subgraphs per Network">
+        <meta property="og:description" content="Visualize how many subgraphs are deployed per chain on The Graph Network with this interactive dashboard.">
+        <meta property="og:url" content="https://graphtools.pro/delegators/">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://graphtools.pro/graphtoolsprologo.jpg">
+        
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Graph Tools Pro :: Delegators Activity Log">
+        <meta name="twitter:description" content="See how The Graph Network is utilized across different chains through a live subgraph deployment tracker.">
+        <meta name="twitter:image" content="https://graphtools.pro/graphtoolsprologo.jpg">
+        
+        <title>Graph Tools Pro: Subgraphs Network Dashboard</title>
+        <link rel="icon" type="image/png" href="https://graphtools.pro/favicon.ico">
+        
+        <style>           
+            :root {
+                --bg-color: #111;
+                --text-color: #fff;
+                --table-bg: #1e1e1e;
+                --header-bg: #333;
+                --link-color: #fff;
+                --table-border-color: #444;
+                --row-border-color: rgba(255, 255, 255, 0.08); /* Default for dark mode */
+            }
+            .light-mode {
+                --bg-color: #f0f2f5;
+                --text-color: #000;
+                --table-bg: #ffffff;
+                --header-bg: #ddd;
+                --link-color: #0000EE;
+                --table-border-color: #ccc;
+                --row-border-color: rgba(0, 0, 0, 0.3); /* Increased opacity for better visibility in light mode */
+            }
+            /* Lighter border and shadow for light mode */
+            .light-mode table {
+                border-color: #ccc;
+                box-shadow: 0 0 0 1px #ccc, 0 0 8px rgba(0, 0, 0, 0.08);
+            }
+            .light-mode .home-link {
+                color: var(--text-color);
+            }
+            body {
+                background-color: var(--bg-color);
+                color: var(--text-color);
+                font-family: Arial, sans-serif;
+                padding: 10px 20px 20px 20px;
+                margin-top: 0;
+                transition: all 0.3s ease;
+            }
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 15px;
+                line-height: 1;
+            }
+            .breadcrumb {
+                font-size: 0.9em;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                align-items: center;
+            }
+            .toggle-container {
+                display: flex;
+                align-items: center;
+                margin: 0;
+                padding: 0;
+            }
+            .toggle-switch {
+                position: relative;
+                width: 50px;
+                height: 24px;
+                margin-right: 10px;
+            }
+            .toggle-switch input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .toggle-switch .slider {
+                position: absolute;
+                top: 0; left: 0;
+                right: 0; bottom: 0;
+                background: #ccc;
+                transition: 0.4s;
+                border-radius: 34px;
+            }
+            .toggle-switch .slider:before {
+                position: absolute;
+                content: "";
+                height: 18px;
+                width: 18px;
+                left: 4px;
+                bottom: 3px;
+                background: white;
+                transition: 0.4s;
+                border-radius: 50%;
+            }
+            .toggle-switch input:checked + .slider {
+                background: #2196F3;
+            }
+            .toggle-switch input:checked + .slider:before {
+                transform: translateX(24px);
+            }
+            #toggle-icon {
+                font-size: 1.5rem;
+                line-height: 1;
+            }
+            .divider {
+                border: 0;
+                height: 2px;
+                background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+                margin: 15px 0;
+            }
+            .light-mode .divider {
+                background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+            }
+            table {
+                width: 100%;
+                border-collapse: separate;
+                border-spacing: 0;
+                background: var(--table-bg);
+                border: 1px solid var(--table-border-color);
+                box-shadow: 0 0 0 1px var(--table-border-color);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+            th, td {
+                padding: 8px 12px;
+                border: none;
+                text-align: left;
+            }
+            td {
+                border-bottom: 1px solid var(--row-border-color);
+            }
+            th {
+                background-color: var(--header-bg);
+                color: var(--text-color);
+            }
+            tr:last-child td {
+                border-bottom: none;
+            }
+            .download-button {
+                padding: 5px 10px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .download-button:hover {
+                background-color: #45a049;
+            }
+            .tooltip-header {
+                position: relative;
+                cursor: help;
+            }
+            .tooltip-header .tooltip-text {
+                visibility: hidden;
+                background-color: #333;
+                color: #fff;
+                text-align: left;
+                padding: 6px 10px;
+                border-radius: 4px;
+                position: absolute;
+                z-index: 1;
+                bottom: 125%;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                transition: opacity 0.3s;
+                width: max-content;
+                max-width: 220px;
+                font-size: 13px;
+                pointer-events: none;
+            }
+            .tooltip-header:hover .tooltip-text {
+                visibility: visible;
+                opacity: 1;
+            }
+            a {
+                color: var(--link-color);
+                text-decoration: none;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+            .footer {
+                text-align: center;
+                margin: 10px 0 40px;
+                font-size: 0.9rem;
+                opacity: 0.9;
+            }
+            .footer a {
+                color: #80bfff;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            .footer a:hover {
+                color: #4d94ff;
+            }
+            .light-mode .footer a {
+                color: #0066cc;
+            }
+            .light-mode .footer a:hover {
+                color: #0033ff;
+            }
+            .footer-divider {
+                border: none;
+                border-bottom: 1px solid rgba(200, 200, 200, 0.2);
+                margin: 40px 0 10px;
+                opacity: 0.8;
+            }
+            .current-page-title {
+                color: #00bcd4;
+                font-weight: bold;
+            }
+            .light-mode .current-page-title {
+                color: #1a73e8;
+            }
+    </style>
+        
+    </head>
+
+    <body>
+
+        <!-- Header with breadcrumb and toggle -->
+
+        <div class="header-container">
+            <div class="breadcrumb" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500; font-size: 0.85em; letter-spacing: 0.3px; text-shadow: 0 1px 2px rgba(0,0,0,0.15);">
+                <a href="https://graphtools.pro" class="home-link" style="text-decoration: none;">🏠 Home</a>&nbsp;&nbsp;&raquo;&nbsp;&nbsp;
+                <span class="current-page-title">📊 Subgraphs Network Dashboard</span>    
+            </div>
+
+            <div class="toggle-container">
+                <label class="toggle-switch">
+                    <input type="checkbox" onclick="toggleTheme()">
+                    <span class="slider"></span>
+                </label>
+                <span id="toggle-icon">🌙</span>
+            </div>
+
+        </div>
+
+        <hr class="divider">
+            <div style="text-align: center;">    
+            <h1 style="margin-bottom: 4px;">Subgraphs Network Dashboard</h1>
+            <div style="text-align: center; font-size: 0.8em; color: var(--text-color); margin-top: 0; margin-bottom: 30px;">
+                Generated on: 2025-05-07 15:22 UTC - (updated every day at 8am UTC) - v1.0.2
+            </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto 10px auto; font-size: 1em;">
+            <div style="color: #4CAF50;"><strong>Total Subgraphs:</strong> 12,271</div>
+            <button class="download-button" onclick="downloadCSV()">Download CSV</button>
+        </div>
+        <div style="overflow-x:auto; max-width: 600px; margin: 0 auto;">
+        <table id="networkTable" style="width: 100%;">
+            <tr>
+                <th onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">Network</th>
+                <th onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">Subgraph Count</th>
+                <th onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">Var (24h)</th>
+            </tr>
+            <tr>
+                <td><img src='images/ethereum.png' alt='mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Ethereum (Mainnet)</td>
+                <td data-value="2140">2,140</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/base.png' alt='base' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Base</td>
+                <td data-value="1375">1,375</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/bsc.png' alt='bsc' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Bsc</td>
+                <td data-value="1222">1,222</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/arbitrum.png' alt='arbitrum-one' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Arbitrum-One</td>
+                <td data-value="1195">1,195</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/polygon.png' alt='matic' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Polygon (Matic)</td>
+                <td data-value="1149">1,149</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/optimism.png' alt='optimism' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Optimism</td>
+                <td data-value="507">507</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/avalanche.png' alt='avalanche' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Avalanche</td>
+                <td data-value="390">390</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/zksync.png' alt='zksync-era' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Zksync-Era</td>
+                <td data-value="376">376</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/sepolia.png' alt='sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Sepolia</td>
+                <td data-value="363">363</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/linea.png' alt='linea' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Linea</td>
+                <td data-value="315">315</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/scroll.png' alt='scroll' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Scroll</td>
+                <td data-value="294">294</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/gnosis.png' alt='gnosis' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Gnosis</td>
+                <td data-value="251">251</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/fantom.png' alt='fantom' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Fantom</td>
+                <td data-value="245">245</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='arbitrum-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Arbitrum-Sepolia</td>
+                <td data-value="233">233</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/celo.png' alt='celo' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Celo</td>
+                <td data-value="158">158</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='chapel' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Chapel</td>
+                <td data-value="154">154</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='base-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Base-Sepolia</td>
+                <td data-value="142">142</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/polygon-zkevm.png' alt='polygon-zkevm' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Polygon-Zkevm</td>
+                <td data-value="135">135</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='blast-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Blast-Mainnet</td>
+                <td data-value="110">110</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/abstract.png' alt='sonic' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Sonic</td>
+                <td data-value="100">100</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/fuse.png' alt='fuse' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Fuse</td>
+                <td data-value="71">71</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/moonbeam.png' alt='moonbeam' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Moonbeam</td>
+                <td data-value="68">68</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='xdai' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Xdai</td>
+                <td data-value="66">66</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='polygon-amoy' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Polygon-Amoy</td>
+                <td data-value="61">61</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='moonriver' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Moonriver</td>
+                <td data-value="53">53</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mode-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mode-Mainnet</td>
+                <td data-value="52">52</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/fuji.png' alt='fuji' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Fuji</td>
+                <td data-value="48">48</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='scroll-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Scroll-Sepolia</td>
+                <td data-value="45">45</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='monad-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Monad-Testnet</td>
+                <td data-value="44">44</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='optimism-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Optimism-Sepolia</td>
+                <td data-value="44">44</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='near-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Near-Mainnet</td>
+                <td data-value="40">40</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='solana-mainnet-beta' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Solana-Mainnet-Beta</td>
+                <td data-value="40">40</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/soneium.png' alt='soneium' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Soneium</td>
+                <td data-value="39">39</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/berachain.png' alt='berachain' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Berachain</td>
+                <td data-value="34">34</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/unichain.png' alt='unichain' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Unichain</td>
+                <td data-value="33">33</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/aurora.png' alt='aurora' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Aurora</td>
+                <td data-value="32">32</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='fantom-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Fantom-Testnet</td>
+                <td data-value="32">32</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/harmony.png' alt='harmony' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Harmony</td>
+                <td data-value="32">32</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/boba.png' alt='boba' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Boba</td>
+                <td data-value="30">30</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/kaia.png' alt='kaia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Kaia</td>
+                <td data-value="28">28</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/abstract.png' alt='abstract' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Abstract</td>
+                <td data-value="28">28</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='near-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Near-Testnet</td>
+                <td data-value="25">25</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='sei-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Sei-Mainnet</td>
+                <td data-value="23">23</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='holesky' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Holesky</td>
+                <td data-value="22">22</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='celo-alfajores' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Celo-Alfajores</td>
+                <td data-value="21">21</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='etherlink-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Etherlink-Mainnet</td>
+                <td data-value="20">20</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='blast-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Blast-Testnet</td>
+                <td data-value="20">20</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='solana-devnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Solana-Devnet</td>
+                <td data-value="20">20</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='xlayer-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Xlayer-Mainnet</td>
+                <td data-value="17">17</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/hemi.png' alt='hemi' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Hemi</td>
+                <td data-value="14">14</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='zksync-era-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Zksync-Era-Sepolia</td>
+                <td data-value="14">14</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mumbai' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mumbai</td>
+                <td data-value="14">14</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='soneium-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Soneium-Testnet</td>
+                <td data-value="14">14</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='linea-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Linea-Sepolia</td>
+                <td data-value="11">11</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/rootstock.png' alt='rootstock' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Rootstock</td>
+                <td data-value="11">11</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/lens.png' alt='lens' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Lens</td>
+                <td data-value="10">10</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/vana.png' alt='vana' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Vana</td>
+                <td data-value="9">9</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='astar-zkevm-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Astar-Zkevm-Mainnet</td>
+                <td data-value="9">9</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='abstract-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Abstract-Testnet</td>
+                <td data-value="9">9</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/chiliz.png' alt='chiliz' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Chiliz</td>
+                <td data-value="8">8</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='goerli' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Goerli</td>
+                <td data-value="8">8</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/eos.png' alt='eos' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Eos</td>
+                <td data-value="8">8</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='starknet-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Starknet-Mainnet</td>
+                <td data-value="8">8</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='hoodi' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Hoodi</td>
+                <td data-value="8">8</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/ink.png' alt='ink' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Ink</td>
+                <td data-value="8">8</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/iotex.png' alt='iotex' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Iotex</td>
+                <td data-value="7">7</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='etherlink-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Etherlink-Testnet</td>
+                <td data-value="6">6</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='boba-bnb' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Boba-Bnb</td>
+                <td data-value="6">6</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='rootstock-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Rootstock-Testnet</td>
+                <td data-value="6">6</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='injective-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Injective-Mainnet</td>
+                <td data-value="5">5</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mbase' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mbase</td>
+                <td data-value="5">5</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/fraxtal.png' alt='fraxtal' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Fraxtal</td>
+                <td data-value="5">5</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='aurora-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Aurora-Testnet</td>
+                <td data-value="5">5</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/injective.png' alt='injective' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Injective</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/zetachain.png' alt='zetachain' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Zetachain</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mint' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mint</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='peaq' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Peaq</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='neox-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Neox-Testnet</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='megaeth-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Megaeth-Testnet</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/wax.png' alt='wax' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Wax</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='gravity-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Gravity-Mainnet</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='base-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Base-Testnet</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='sei-atlantic' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Sei-Atlantic</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='xlayer-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Xlayer-Sepolia</td>
+                <td data-value="4">4</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='vana-moksha' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Vana-Moksha</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/corn.png' alt='corn' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Corn</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='cosmoshub-4' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Cosmoshub-4</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='unichain-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Unichain-Testnet</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='botanix-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Botanix-Testnet</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='lens-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Lens-Testnet</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='neox' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Neox</td>
+                <td data-value="3">3</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='boba-bnb-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Boba-Bnb-Testnet</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='solana-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Solana-Mainnet</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mint-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mint-Sepolia</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='sei-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Sei-Testnet</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='arbitrum-goerli' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Arbitrum-Goerli</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='boba-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Boba-Sepolia</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='swellchain' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Swellchain</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='osmosis-1' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Osmosis-1</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='boba-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Boba-Testnet</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/kylin.png' alt='kylin' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Kylin</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='berachain-bepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Berachain-Bepolia</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='arweave-mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Arweave-Mainnet</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='hemi-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Hemi-Sepolia</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='arbitrum' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Arbitrum</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/arbitrum-nova.png' alt='arbitrum-nova' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Arbitrum-Nova</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='joc-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Joc-Testnet</td>
+                <td data-value="2">2</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mammothon-g2' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mammothon-G2</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='iotex-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Iotex-Testnet</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='zkyoto-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Zkyoto-Testnet</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='gnosis-beacon' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Gnosis-Beacon</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='autonomys-taurus' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Autonomys-Taurus</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='mode-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Mode-Sepolia</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='chiado-beacon' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Chiado-Beacon</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='gnosis-chiado' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Gnosis-Chiado</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='ink-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Ink-Sepolia</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='polygon-zkevm-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Polygon-Zkevm-Testnet</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='viction' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Viction</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='stellar' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Stellar</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='beacon' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Beacon</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='sepolia-beacon' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Sepolia-Beacon</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='apechain-curtis' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Apechain-Curtis</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='chiliz-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Chiliz-Testnet</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='geo' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Geo</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='zksync-era-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Zksync-Era-Testnet</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='btc' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Btc</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='holesky-beacon' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Holesky-Beacon</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='linea-goerli' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Linea-Goerli</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='apechain' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Apechain</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='fuse-testnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Fuse-Testnet</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+            <tr>
+                <td><img src='images/placeholder_logo.png' alt='polygon-zkevm-cardona' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' />Polygon-Zkevm-Cardona</td>
+                <td data-value="1">1</td>
+                <td data-value=""></td>
+            </tr>
+        </table>
+
+            <hr class="footer-divider">
+            <div class="footer">
+                ©<script>document.write(new Date().getFullYear())</script> 
+                <a href="https://graphtools.pro">Graph Tools Pro</a> :: Made with ❤️ by 
+                <a href="https://x.com/graphtronauts_c" target="_blank">Graphtronauts</a>
+                for <a href="https://x.com/graphprotocol" target="_blank">The Graph</a> ecosystem 👨‍🚀
+                <div style="margin-top: 4px;">
+                    <span style="font-size: 0.8rem;">For Info: <a href="https://x.com/pdiomede" target="_blank">@pdiomede</a> & <a href="https://x.com/PaulBarba12" target="_blank">@PaulBarba12</a></span>
+                </div>
+            </div>
+        
+        </div>
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const toggle = document.getElementById('themeToggle');
+                const body = document.body;
+                // Default to dark mode
+                body.classList.add('dark-mode');
+
+                toggle.addEventListener('change', () => {
+                    body.classList.toggle('dark-mode');
+                    body.classList.toggle('light-mode');
+                });
+            });
+
+            function toggleTheme() {
+                document.body.classList.toggle('light-mode');
+                const icon = document.getElementById('toggle-icon');
+                icon.textContent = document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+            }
+                
+            function sortTable(columnIndex) {
+                const table = document.getElementById("networkTable");
+                const rows = Array.from(table.rows).slice(1);
+                const isNumeric = columnIndex === 1;
+                const header = table.rows[0].cells[columnIndex];
+                const currentDirection = header.getAttribute("data-sort-direction") || "desc";
+                const newDirection = currentDirection === "asc" ? "desc" : "asc";
+                header.setAttribute("data-sort-direction", newDirection);
+
+                Array.from(table.rows[0].cells).forEach((cell, idx) => {
+                    if (idx !== columnIndex) {
+                        cell.removeAttribute("data-sort-direction");
+                    }
+                });
+
+                rows.sort((a, b) => {
+                    let aVal = a.cells[columnIndex].getAttribute("data-value") || a.cells[columnIndex].textContent.trim();
+                    let bVal = b.cells[columnIndex].getAttribute("data-value") || b.cells[columnIndex].textContent.trim();
+                    if (isNumeric) {
+                        aVal = parseFloat(aVal.replace(/,/g, '')) || 0;
+                        bVal = parseFloat(bVal.replace(/,/g, '')) || 0;
+                    }
+                    return (newDirection === "asc" ? aVal > bVal : aVal < bVal) ? 1 : -1;
+                });
+
+                rows.forEach(row => table.tBodies[0].appendChild(row));
+            }
+            function downloadCSV() {
+                const link = document.createElement('a');
+                link.href = 'network_subgraph_counts.csv';
+                link.download = 'network_subgraph_counts.csv';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        </script>
+    </body>
+    </html>
+    

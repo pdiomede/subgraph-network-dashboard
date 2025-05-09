@@ -1,0 +1,289 @@
+[2025-05-06 07:18:30 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:18:33 UTC] Fetched subgraph counts for 60 networks.
+[2025-05-06 07:18:33 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:18:33 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:19:17 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:19:17 UTC] Fetched subgraph counts for 60 networks.
+[2025-05-06 07:19:17 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:19:17 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:21:10 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:21:14 UTC] Fetched subgraph counts for 0 networks.
+[2025-05-06 07:21:14 UTC] No data retrieved.
+[2025-05-06 07:21:39 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:21:43 UTC] Fetched subgraph counts for 0 networks.
+[2025-05-06 07:21:43 UTC] No data retrieved.
+[2025-05-06 07:22:44 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:22:45 UTC] Fetched subgraph counts for 60 networks.
+[2025-05-06 07:22:45 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:22:45 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:23:07 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:23:12 UTC] Fetched subgraph counts for 0 networks.
+[2025-05-06 07:23:12 UTC] No data retrieved.
+[2025-05-06 07:24:31 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:24:33 UTC] Fetched subgraph counts for 0 networks.
+[2025-05-06 07:24:33 UTC] No data retrieved.
+[2025-05-06 07:24:40 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:25:36 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:25:45 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:25:45 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:25:45 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:27:02 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:27:09 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:27:09 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:27:09 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:40:33 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:40:42 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:40:42 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:40:42 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:41:17 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:41:26 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:41:26 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:41:26 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:43:00 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:43:07 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:43:07 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:43:42 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:43:47 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:43:47 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:44:23 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:44:29 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:44:29 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:44:29 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:49:55 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:50:00 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:50:00 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:50:00 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:52:29 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:52:35 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:52:35 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:52:35 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:57:37 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:57:43 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:57:43 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:57:43 UTC] Saved HTML report to reports/index.html
+[2025-05-06 07:58:03 UTC] Starting network subgraph metrics script...
+[2025-05-06 07:58:11 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 07:58:11 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 07:58:11 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:00:37 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:00:45 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:00:45 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:00:45 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:01:53 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:01:58 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:01:58 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:01:58 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:02:35 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:02:42 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:02:42 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:02:42 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:03:06 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:03:12 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:03:12 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:03:12 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:04:02 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:04:08 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:04:08 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:04:08 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:05:38 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:05:47 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:05:47 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:05:47 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:06:07 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:06:13 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:06:13 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:06:13 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:25:36 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:25:41 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:25:41 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:25:41 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:28:30 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:28:38 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:28:38 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:28:38 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:29:10 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:29:21 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:29:21 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:29:21 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:30:45 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:30:52 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:30:52 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:30:52 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:33:11 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:33:20 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:33:20 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:33:20 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:33:56 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:34:02 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:34:02 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:34:02 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:34:21 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:34:29 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:34:29 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:34:29 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:35:12 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:35:23 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:35:23 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:35:23 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:36:11 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:36:17 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:36:17 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:36:17 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:38:52 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:38:58 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:38:58 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:38:58 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:41:45 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:41:51 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:41:51 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:41:51 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:43:41 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:43:48 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:43:48 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:43:48 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:45:39 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:45:45 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:45:45 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:45:45 UTC] Saved HTML report to reports/index.html
+[2025-05-06 08:46:57 UTC] Starting network subgraph metrics script...
+[2025-05-06 08:47:03 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 08:47:03 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 08:47:03 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:37:41 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:37:50 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:37:50 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:37:50 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:38:56 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:39:03 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:39:03 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:39:03 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:40:41 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:40:48 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:40:48 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:40:48 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:42:43 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:42:51 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:42:51 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:42:51 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:48:48 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:48:55 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:48:55 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:48:55 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:51:03 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:51:15 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:51:15 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:51:15 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:51:31 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:51:38 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:51:38 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:51:38 UTC] Saved HTML report to reports/index.html
+[2025-05-06 10:56:18 UTC] Starting network subgraph metrics script...
+[2025-05-06 10:56:25 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 10:56:25 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 10:56:25 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:04:21 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:04:34 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:04:34 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:04:34 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:05:39 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:05:46 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:05:46 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:05:46 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:07:59 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:08:06 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:08:06 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:08:06 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:12:18 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:12:27 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:12:27 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:12:27 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:33:52 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:34:01 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:34:01 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:34:01 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:36:02 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:36:09 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:36:09 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:36:09 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:37:27 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:37:37 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:37:37 UTC] 📁 Saved metrics snapshot to metrics/metric_20250506_133737.json
+[2025-05-06 13:37:37 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:37:37 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:38:34 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:38:41 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:38:41 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_133841.json
+[2025-05-06 13:38:41 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:38:41 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:38:51 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:39:00 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:39:00 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_133900.json
+[2025-05-06 13:39:00 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:39:00 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:40:32 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:40:42 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:40:42 UTC] 📈 Appended metrics snapshot to history file ./reports/metrics/history_2025-05-06.json
+[2025-05-06 13:40:42 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_134042.json
+[2025-05-06 13:40:42 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:40:42 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:42:39 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:42:50 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:42:50 UTC] 📈 Appended metrics snapshot to history file ./reports/metrics/history_2025-05-06.json
+[2025-05-06 13:42:50 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_134250.json
+[2025-05-06 13:42:50 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:42:50 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:43:45 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:43:52 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:43:52 UTC] 📈 Appended metrics snapshot to history file ./reports/metrics/history_2025-05-06.json
+[2025-05-06 13:43:52 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_134352.json
+[2025-05-06 13:43:52 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:43:52 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:44:17 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:44:25 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:44:25 UTC] ⏩ Skipped metric snapshot creation — not 08:00 UTC.
+[2025-05-06 13:44:25 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:44:25 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:47:35 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:47:41 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:47:41 UTC] ⏩ Skipped metric snapshot creation — not 08:00 UTC.
+[2025-05-06 13:47:41 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:47:41 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:47:48 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:47:54 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:47:54 UTC] ⏩ Skipped metric snapshot creation — not 08:00 UTC.
+[2025-05-06 13:47:54 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:47:54 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:49:02 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:49:02 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-06 13:49:10 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:49:10 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_134910.json
+[2025-05-06 13:49:10 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:49:10 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:52:12 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:52:12 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-06 13:52:22 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:52:22 UTC] 📊 total_subgraphs_yesterday: 18140
+[2025-05-06 13:52:22 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_135222.json
+[2025-05-06 13:52:22 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:52:22 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:54:52 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:54:52 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-06 13:55:00 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:55:00 UTC] 📊 total_subgraphs_yesterday: 18140
+[2025-05-06 13:55:00 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_135500.json
+[2025-05-06 13:55:00 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:55:00 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:55:29 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:55:29 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-06 13:55:39 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:55:39 UTC] 📊 total_subgraphs_yesterday: 18040
+[2025-05-06 13:55:39 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_135539.json
+[2025-05-06 13:55:39 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:55:39 UTC] Saved HTML report to reports/index.html
+[2025-05-06 13:56:57 UTC] Starting network subgraph metrics script...
+[2025-05-06 13:56:57 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-06 13:57:04 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-06 13:57:04 UTC] ✅ Parsed total_subgraphs_yesterday as 18040 (type: <class 'int'>)
+[2025-05-06 13:57:04 UTC] 📁 Saved metrics snapshot to ./reports/metrics/metric_20250506_135704.json
+[2025-05-06 13:57:04 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-06 13:57:04 UTC] Saved HTML report to reports/index.html
