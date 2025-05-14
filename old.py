@@ -8,9 +8,9 @@ from dataclasses import dataclass
 from typing import List
 
 
-# v1.0.4 / 13-May-2025
+# v1.0.5 / 14-May-2025
 # Author: Paolo Diomede
-DASHBOARD_VERSION = "1.0.4"
+DASHBOARD_VERSION = "1.0.5"
 
 
 # Data class for network subgraph counts
@@ -19,6 +19,9 @@ class NetworkSubgraphCount:
     network_name: str
     subgraph_count: int
 
+# Data class for network subgraph and unique indexer counts
+from collections import namedtuple
+NetworkIndexerData = namedtuple("NetworkIndexerData", ["network_name", "subgraph_count", "unique_indexer_count"])
 
 # Mapping of network names to local logo image paths
 NETWORK_LOGOS = {
@@ -93,15 +96,12 @@ API_KEY = os.getenv("GRAPH_API_KEY")
 # Load metric snapshot target hour from environment, default to 8
 METRIC_SNAPSHOT_HOUR = int(os.getenv("METRIC_SNAPSHOT_HOUR", 8))
 
-
 # List of all used subgraphs
 SUBGRAPH_URL = f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/9wzatP4KXm4WinEhB31MdKST949wCH8ZnkGe8o3DLTwp"
-
 
 # Create REPORTS directory if it doesn't exist
 report_dir = "reports"
 os.makedirs(report_dir, exist_ok=True)
-
 
 # Create LOGS directory if it doesn't exist
 log_dir = "logs"
@@ -112,83 +112,16 @@ log_file = os.path.join(log_dir, f"metrics_log_{datetime.now(timezone.utc).strft
 metrics_dir = "./reports/metrics"
 os.makedirs(metrics_dir, exist_ok=True)
 
-
 # Get data to be used in the log and report files
 timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
 
 
-# GraphQL query template to fetch networks from current deployments with pagination
-NETWORKS_QUERY_TEMPLATE = """
-{
-  currentSubgraphDeploymentRelations(first: 1000, skip: %d) {
-    deployment {
-      manifest {
-        network
-      }
-    }
-  }
-}
-"""
-
-NETWORKS_QUERY_TEMPLATE2 = """
-{
-    subgraphs(first: ${pageSize}, skip: ${skip}, where: { currentVersion_not: null }) {
-        id
-        currentVersion {
-        subgraphDeployment {
-            manifest {
-            network
-            }
-        }
-        }
-    }
-    }
-}
-"""
-
-def fetch_network_subgraph_counts() -> List[NetworkSubgraphCount]:
-    """Fetch network names and count subgraphs per network"""
-    url = "https://gateway.thegraph.com/api/" + API_KEY + "/subgraphs/id/DZz4kDTdmzWLWsV373w2bSmoar3umKKH9y82SUKr5qmp"
-    headers = {"Content-Type": "application/json"}
-    counts = {}
-    skip = 0
-
-    while True:
-        query = NETWORKS_QUERY_TEMPLATE % skip
-        response = requests.post(url, json={"query": query}, headers=headers)
-
-        if response.status_code != 200:
-            log_message(f"Failed to fetch data: {response.status_code}")
-            break
-
-        batch = response.json().get("data", {}).get("currentSubgraphDeploymentRelations", [])
-        if not batch:
-            break
-
-        for item in batch:
-            deployment = item.get("deployment")
-            if not deployment:
-                continue
-
-            manifest = deployment.get("manifest")
-            if not manifest:
-                continue
-
-            network = manifest.get("network")
-            if network:
-                counts[network] = counts.get(network, 0) + 1
-
-        skip += 1000
-
-    result = [NetworkSubgraphCount(network_name=k, subgraph_count=v) for k, v in counts.items()]
-    log_message(f"Fetched subgraph counts for {len(result)} networks.")
-    return result
-
-def fetch_network_subgraph_counts2() -> List[NetworkSubgraphCount]:
-    """Fetch network names and count subgraphs per network using updated query"""
+def fetch_network_subgraph_counts() -> List["NetworkIndexerData"]:
+    """Fetch network names and count subgraphs and unique indexers per network using updated query"""
     url = f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/DZz4kDTdmzWLWsV373w2bSmoar3umKKH9y82SUKr5qmp"
     headers = {"Content-Type": "application/json"}
     counts = {}
+    indexers_by_network = {}
     skip = 0
     page_size = 1000
 
@@ -200,6 +133,11 @@ def fetch_network_subgraph_counts2() -> List[NetworkSubgraphCount]:
                     subgraphDeployment {{
                         manifest {{
                             network
+                        }}
+                        indexerAllocations(first: 1000, where: {{ status: Active }}) {{
+                            indexer {{
+                                id
+                            }}
                         }}
                     }}
                 }}
@@ -219,25 +157,38 @@ def fetch_network_subgraph_counts2() -> List[NetworkSubgraphCount]:
         for item in batch:
             deployment = item.get("currentVersion", {}).get("subgraphDeployment", {})
             manifest = deployment.get("manifest")
-            if manifest:
-                network = manifest.get("network")
-                if network:
-                    counts[network] = counts.get(network, 0) + 1
+            if not manifest:
+                continue
+            network = manifest.get("network")
+            if not network:
+                continue
+            counts[network] = counts.get(network, 0) + 1
+            # Process indexerAllocations
+            allocations = deployment.get("indexerAllocations", [])
+            if network not in indexers_by_network:
+                indexers_by_network[network] = set()
+            for alloc in allocations:
+                indexer = alloc.get("indexer")
+                if indexer and "id" in indexer:
+                    indexers_by_network[network].add(indexer["id"])
 
         skip += page_size
 
-    result = [NetworkSubgraphCount(network_name=k, subgraph_count=v) for k, v in counts.items()]
-    log_message(f"Fetched subgraph counts for {len(result)} networks.")
+    result = []
+    for network, subgraph_count in counts.items():
+        unique_indexer_count = len(indexers_by_network.get(network, set()))
+        result.append(NetworkIndexerData(network_name=network, subgraph_count=subgraph_count, unique_indexer_count=unique_indexer_count))
+    log_message(f"Fetched subgraph and indexer counts for {len(result)} networks.")
     return result
 
 
-def save_subgraph_counts_to_csv(data: List[NetworkSubgraphCount], filename: str = "network_subgraph_counts.csv"):
+def save_subgraph_counts_to_csv(data: List[NetworkIndexerData], filename: str = "network_subgraph_counts.csv"):
     path = os.path.join(report_dir, filename)
     # Sort data in descending order by subgraph_count before writing
     sorted_data = sorted(data, key=lambda x: x.subgraph_count, reverse=True)
     with open(path, mode="w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(["Network", "Subgraph Count"])
+        writer.writerow(["Network", "Subgraph Count", "Unique Indexers"])
         for entry in sorted_data:
             if entry.network_name.lower() == "mainnet":
                 name = "Ethereum (Mainnet)"
@@ -245,10 +196,11 @@ def save_subgraph_counts_to_csv(data: List[NetworkSubgraphCount], filename: str 
                 name = "Polygon (Matic)"
             else:
                 name = entry.network_name
-            writer.writerow([name, f"{entry.subgraph_count:,}"])
+            writer.writerow([name, f"{entry.subgraph_count:,}", entry.unique_indexer_count])
     log_message(f"Saved CSV report to {path}")
 
-def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str = "index.html", total_subgraphs_yesterday=None, yesterday_network_counts=None):
+
+def save_subgraph_counts_to_html(data: List[NetworkIndexerData], filename: str = "index.html", total_subgraphs_yesterday=None, yesterday_network_counts=None):
     path = os.path.join(report_dir, filename)
     total = sum(entry.subgraph_count for entry in data)
     sorted_data = sorted(data, key=lambda x: x.subgraph_count, reverse=True)
@@ -482,8 +434,7 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
             .light-mode .current-page-title {{
                 color: #1a73e8;
             }}
-    </style>
-        
+        </style>
     </head>
 
     <body>
@@ -521,9 +472,22 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
         <div style="overflow-x:auto; max-width: 600px; margin: 0 auto;">
         <table id="networkTable" style="width: 100%;">
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">Network</th>
-                <th onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">Subgraph Count</th>
-                <th onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">Var (24h)</th>
+                <th class="tooltip-header" onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">
+                    Network
+                    <span class="tooltip-text">Network where subgraphs are deployed</span>
+                </th>
+                <th class="tooltip-header" onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">
+                    Subgraph Count
+                    <span class="tooltip-text">Total number of subgraphs currently deployed on this network</span>
+                </th>
+                <th class="tooltip-header" onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">
+                    Var (24h)
+                    <span class="tooltip-text">Change in subgraph count compared to the previous day</span>
+                </th>
+                <th class="tooltip-header" onclick="sortTable(3)" style="cursor:pointer;" data-sort-direction="desc">
+                    Unique Indexers
+                    <span class="tooltip-text">Number of unique indexers actively allocating to this network</span>
+                </th>
             </tr>"""
 
     for entry in sorted_data:
@@ -550,6 +514,7 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
               <td>{logo_html}<a href="https://thegraph.com/explorer?indexedNetwork={entry.network_name}&orderBy=Query+Count&orderDirection=desc" target="_blank" style="color: var(--link-color); text-decoration: none;">{name} <img src="./images/link-icon.png" alt="link icon" style="width: 12px; height: 12px; vertical-align: middle; margin-left: 4px;" /></a></td>
                 <td data-value="{entry.subgraph_count}">{entry.subgraph_count:,}</td>
                 <td data-value="{diff_value}">{diff}</td>
+                <td data-value="{entry.unique_indexer_count}">{entry.unique_indexer_count}</td>
             </tr>"""
 
     html += """
@@ -590,14 +555,14 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
             function sortTable(columnIndex) {
                 const table = document.getElementById("networkTable");
                 const rows = Array.from(table.rows).slice(1);
-                const isNumeric = columnIndex === 1;
+                const isNumeric = columnIndex === 1 || columnIndex === 3;
                 const header = table.rows[0].cells[columnIndex];
                 const currentDirection = header.getAttribute("data-sort-direction") || "desc";
                 const newDirection = currentDirection === "asc" ? "desc" : "asc";
                 header.setAttribute("data-sort-direction", newDirection);
 
                 Array.from(table.rows[0].cells).forEach((cell, idx) => {
-                    if (idx !== columnIndex) {
+                    if (idx != columnIndex) {
                         cell.removeAttribute("data-sort-direction");
                     }
                 });
@@ -632,10 +597,11 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
 
     log_message(f"Saved HTML report to {path}")
 
+
 if __name__ == "__main__":
     log_message("Starting network subgraph metrics script...")
     log_message(f"🕒 Configured METRIC_SNAPSHOT_HOUR: {METRIC_SNAPSHOT_HOUR}")
-    subgraph_data = fetch_network_subgraph_counts2()
+    subgraph_data = fetch_network_subgraph_counts()
     if subgraph_data:
         # Only write metrics at the configured UTC hour
         current_time_utc = datetime.now(timezone.utc)
@@ -650,6 +616,7 @@ if __name__ == "__main__":
 
         total_subgraphs_yesterday = None
         yesterday_network_counts = None
+        
         if yesterday_file:
             try:
                 with open(yesterday_file, "r") as f:

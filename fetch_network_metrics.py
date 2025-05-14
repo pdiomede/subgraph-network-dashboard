@@ -374,13 +374,14 @@ def save_subgraph_counts_to_html(data: List[NetworkIndexerData], filename: str =
             .tooltip-header .tooltip-text {{
                 visibility: hidden;
                 background-color: #333;
-                color: #fff;
+                color: #ffeb3b;
                 text-align: left;
                 padding: 6px 10px;
                 border-radius: 4px;
                 position: absolute;
-                z-index: 1;
-                bottom: 125%;
+                z-index: 9999;
+                top: 135%;
+                right: auto;
                 left: 50%;
                 transform: translateX(-50%);
                 opacity: 0;
@@ -389,6 +390,10 @@ def save_subgraph_counts_to_html(data: List[NetworkIndexerData], filename: str =
                 max-width: 220px;
                 font-size: 13px;
                 pointer-events: none;
+                overflow: visible;
+                white-space: normal;
+                word-wrap: break-word;
+                box-sizing: border-box;
             }}
             .tooltip-header:hover .tooltip-text {{
                 visibility: visible;
@@ -472,21 +477,28 @@ def save_subgraph_counts_to_html(data: List[NetworkIndexerData], filename: str =
         <div style="overflow-x:auto; max-width: 600px; margin: 0 auto;">
         <table id="networkTable" style="width: 100%;">
             <tr>
-                <th class="tooltip-header" onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">
-                    Network
-                    <span class="tooltip-text">The blockchain network where subgraphs are deployed</span>
+                <th onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Network
+                    </span>
                 </th>
-                <th class="tooltip-header" onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">
-                    Subgraph Count
-                    <span class="tooltip-text">Total number of subgraphs currently deployed on this network</span>
+                <th onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Subgraph Count
+                        <span class="tooltip-text">Total number of subgraphs currently deployed on this network</span>
+                    </span>
                 </th>
-                <th class="tooltip-header" onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">
-                    Var (24h)
-                    <span class="tooltip-text">Change in subgraph count compared to the previous day</span>
+                <th onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Var (24h)
+                        <span class="tooltip-text">Change in subgraph count compared to the previous day</span>
+                    </span>
                 </th>
-                <th class="tooltip-header" onclick="sortTable(3)" style="cursor:pointer;" data-sort-direction="desc">
-                    Unique Indexers
-                    <span class="tooltip-text">Number of unique indexers actively allocating to this network</span>
+                <th onclick="sortTable(3)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Unique Indexers
+                        <span class="tooltip-text">Number of unique indexers actively allocating to this network</span>
+                    </span>
                 </th>
             </tr>"""
 

@@ -167,13 +167,14 @@
             .tooltip-header .tooltip-text {
                 visibility: hidden;
                 background-color: #333;
-                color: #fff;
+                color: #ffeb3b;
                 text-align: left;
                 padding: 6px 10px;
                 border-radius: 4px;
                 position: absolute;
-                z-index: 1;
-                bottom: 125%;
+                z-index: 9999;
+                top: 135%;
+                right: auto;
                 left: 50%;
                 transform: translateX(-50%);
                 opacity: 0;
@@ -182,6 +183,10 @@
                 max-width: 220px;
                 font-size: 13px;
                 pointer-events: none;
+                overflow: visible;
+                white-space: normal;
+                word-wrap: break-word;
+                box-sizing: border-box;
             }
             .tooltip-header:hover .tooltip-text {
                 visibility: visible;
@@ -254,7 +259,7 @@
             <div style="text-align: center;">    
             <h1 style="margin-bottom: 4px;">Subgraphs Network Dashboard</h1>
             <div style="text-align: center; font-size: 0.8em; color: var(--text-color); margin-top: 0; margin-bottom: 30px;">
-                Generated on: 2025-05-14 13:57 UTC - (updated every day at 8am UTC) - v1.0.5
+                Generated on: 2025-05-14 14:30 UTC - (updated every day at 8am UTC) - v1.0.5
             </div>
         </div>
 
@@ -265,10 +270,30 @@
         <div style="overflow-x:auto; max-width: 600px; margin: 0 auto;">
         <table id="networkTable" style="width: 100%;">
             <tr>
-                <th onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">Network</th>
-                <th onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">Subgraph Count</th>
-                <th onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">Var (24h)</th>
-                <th onclick="sortTable(3)" style="cursor:pointer;" data-sort-direction="desc">Unique Indexers</th>
+                <th onclick="sortTable(0)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Network
+                        <span class="tooltip-text">Network where subgraphs are deployed</span>
+                    </span>
+                </th>
+                <th onclick="sortTable(1)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Subgraph Count
+                        <span class="tooltip-text">Total number of subgraphs currently deployed on this network</span>
+                    </span>
+                </th>
+                <th onclick="sortTable(2)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Var (24h)
+                        <span class="tooltip-text">Change in subgraph count compared to the previous day</span>
+                    </span>
+                </th>
+                <th onclick="sortTable(3)" style="cursor:pointer;" data-sort-direction="desc">
+                    <span class="tooltip-header" style="position: relative; display: inline-block;">
+                        Unique Indexers
+                        <span class="tooltip-text">Number of unique indexers actively allocating to this network</span>
+                    </span>
+                </th>
             </tr>
             <tr>
               <td><img src='images/ethereum.png' alt='mainnet' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' /><a href="https://thegraph.com/explorer?indexedNetwork=mainnet&orderBy=Query+Count&orderDirection=desc" target="_blank" style="color: var(--link-color); text-decoration: none;">Ethereum (Mainnet) <img src="./images/link-icon.png" alt="link icon" style="width: 12px; height: 12px; vertical-align: middle; margin-left: 4px;" /></a></td>
@@ -352,7 +377,7 @@
               <td><img src='images/placeholder_logo.png' alt='arbitrum-sepolia' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' /><a href="https://thegraph.com/explorer?indexedNetwork=arbitrum-sepolia&orderBy=Query+Count&orderDirection=desc" target="_blank" style="color: var(--link-color); text-decoration: none;">Arbitrum-Sepolia <img src="./images/link-icon.png" alt="link icon" style="width: 12px; height: 12px; vertical-align: middle; margin-left: 4px;" /></a></td>
                 <td data-value="235">235</td>
                 <td data-value=""></td>
-                <td data-value="10">10</td>
+                <td data-value="9">9</td>
             </tr>
             <tr>
               <td><img src='images/placeholder_logo.png' alt='chapel' style='width:18px; height:18px; vertical-align:middle; margin-right:6px;' /><a href="https://thegraph.com/explorer?indexedNetwork=chapel&orderBy=Query+Count&orderDirection=desc" target="_blank" style="color: var(--link-color); text-decoration: none;">Chapel <img src="./images/link-icon.png" alt="link icon" style="width: 12px; height: 12px; vertical-align: middle; margin-left: 4px;" /></a></td>
