@@ -8,9 +8,9 @@ from dataclasses import dataclass
 from typing import List
 
 
-# v1.0.2 / 7-May-2025
+# v1.0.4 / 13-May-2025
 # Author: Paolo Diomede
-DASHBOARD_VERSION = "1.0.2"
+DASHBOARD_VERSION = "1.0.4"
 
 
 # Data class for network subgraph counts
@@ -72,7 +72,7 @@ NETWORK_LOGOS = {
     "vana": "images/vana.png",
     "wax": "images/wax.png",
     "zkfair": "images/zkfair.png",
-    "zksync-era": "images/zksync.png",
+    "zksync-era": "images/zksync-era.png",
     "zetachain": "images/zetachain.png"
 }
 
@@ -183,6 +183,53 @@ def fetch_network_subgraph_counts() -> List[NetworkSubgraphCount]:
     result = [NetworkSubgraphCount(network_name=k, subgraph_count=v) for k, v in counts.items()]
     log_message(f"Fetched subgraph counts for {len(result)} networks.")
     return result
+
+def fetch_network_subgraph_counts2() -> List[NetworkSubgraphCount]:
+    """Fetch network names and count subgraphs per network using updated query"""
+    url = f"https://gateway.thegraph.com/api/{API_KEY}/subgraphs/id/DZz4kDTdmzWLWsV373w2bSmoar3umKKH9y82SUKr5qmp"
+    headers = {"Content-Type": "application/json"}
+    counts = {}
+    skip = 0
+    page_size = 1000
+
+    while True:
+        query = f"""{{
+            subgraphs(first: {page_size}, skip: {skip}, where: {{ currentVersion_not: null }}) {{
+                id
+                currentVersion {{
+                    subgraphDeployment {{
+                        manifest {{
+                            network
+                        }}
+                    }}
+                }}
+            }}
+        }}"""
+
+        response = requests.post(url, json={"query": query}, headers=headers)
+
+        if response.status_code != 200:
+            log_message(f"Failed to fetch data: {response.status_code}")
+            break
+
+        batch = response.json().get("data", {}).get("subgraphs", [])
+        if not batch:
+            break
+
+        for item in batch:
+            deployment = item.get("currentVersion", {}).get("subgraphDeployment", {})
+            manifest = deployment.get("manifest")
+            if manifest:
+                network = manifest.get("network")
+                if network:
+                    counts[network] = counts.get(network, 0) + 1
+
+        skip += page_size
+
+    result = [NetworkSubgraphCount(network_name=k, subgraph_count=v) for k, v in counts.items()]
+    log_message(f"Fetched subgraph counts for {len(result)} networks.")
+    return result
+
 
 def save_subgraph_counts_to_csv(data: List[NetworkSubgraphCount], filename: str = "network_subgraph_counts.csv"):
     path = os.path.join(report_dir, filename)
@@ -588,7 +635,7 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
 if __name__ == "__main__":
     log_message("Starting network subgraph metrics script...")
     log_message(f"🕒 Configured METRIC_SNAPSHOT_HOUR: {METRIC_SNAPSHOT_HOUR}")
-    subgraph_data = fetch_network_subgraph_counts()
+    subgraph_data = fetch_network_subgraph_counts2()
     if subgraph_data:
         # Only write metrics at the configured UTC hour
         current_time_utc = datetime.now(timezone.utc)

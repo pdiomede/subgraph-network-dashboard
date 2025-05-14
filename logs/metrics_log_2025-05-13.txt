@@ -1,0 +1,21 @@
+[2025-05-13 17:56:46 UTC] Starting network subgraph metrics script...
+[2025-05-13 17:56:46 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-13 17:56:54 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-13 17:56:54 UTC] 📭 No metric file found for yesterday.
+[2025-05-13 17:56:54 UTC] ⏩ Skipped metric snapshot creation — not 13:00 UTC.
+[2025-05-13 17:56:54 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-13 17:56:54 UTC] Saved HTML report to reports/index.html
+[2025-05-13 17:57:14 UTC] Starting network subgraph metrics script...
+[2025-05-13 17:57:14 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-13 17:57:18 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-13 17:57:18 UTC] 📭 No metric file found for yesterday.
+[2025-05-13 17:57:18 UTC] ⏩ Skipped metric snapshot creation — not 13:00 UTC.
+[2025-05-13 17:57:18 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-13 17:57:18 UTC] Saved HTML report to reports/index.html
+[2025-05-13 17:59:37 UTC] Starting network subgraph metrics script...
+[2025-05-13 17:59:37 UTC] 🕒 Configured METRIC_SNAPSHOT_HOUR: 13
+[2025-05-13 17:59:47 UTC] Fetched subgraph counts for 131 networks.
+[2025-05-13 17:59:47 UTC] 📭 No metric file found for yesterday.
+[2025-05-13 17:59:47 UTC] ⏩ Skipped metric snapshot creation — not 13:00 UTC.
+[2025-05-13 17:59:47 UTC] Saved CSV report to reports/network_subgraph_counts.csv
+[2025-05-13 17:59:47 UTC] Saved HTML report to reports/index.html

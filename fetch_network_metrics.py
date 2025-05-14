@@ -8,9 +8,9 @@ from dataclasses import dataclass
 from typing import List
 
 
-# v1.0.3 / 7-May-2025
+# v1.0.4 / 13-May-2025
 # Author: Paolo Diomede
-DASHBOARD_VERSION = "1.0.3"
+DASHBOARD_VERSION = "1.0.4"
 
 
 # Data class for network subgraph counts
@@ -72,7 +72,7 @@ NETWORK_LOGOS = {
     "vana": "images/vana.png",
     "wax": "images/wax.png",
     "zkfair": "images/zkfair.png",
-    "zksync-era": "images/zksync.png",
+    "zksync-era": "images/zksync-era.png",
     "zetachain": "images/zetachain.png"
 }
 
@@ -547,7 +547,7 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
             diff_value = str(change)
         html += f"""
             <tr>
-                <td>{logo_html}{name}</td>
+              <td>{logo_html}<a href="https://thegraph.com/explorer?indexedNetwork={entry.network_name}&orderBy=Query+Count&orderDirection=desc" target="_blank" style="color: var(--link-color); text-decoration: none;">{name} <img src="./images/link-icon.png" alt="link icon" style="width: 12px; height: 12px; vertical-align: middle; margin-left: 4px;" /></a></td>
                 <td data-value="{entry.subgraph_count}">{entry.subgraph_count:,}</td>
                 <td data-value="{diff_value}">{diff}</td>
             </tr>"""
