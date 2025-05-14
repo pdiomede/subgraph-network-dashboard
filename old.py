@@ -547,7 +547,7 @@ def save_subgraph_counts_to_html(data: List[NetworkSubgraphCount], filename: str
             diff_value = str(change)
         html += f"""
             <tr>
-                <td>{logo_html}{name}</td>
+              <td>{logo_html}<a href="https://thegraph.com/explorer?indexedNetwork={entry.network_name}&orderBy=Query+Count&orderDirection=desc" target="_blank" style="color: var(--link-color); text-decoration: none;">{name} <img src="./images/link-icon.png" alt="link icon" style="width: 12px; height: 12px; vertical-align: middle; margin-left: 4px;" /></a></td>
                 <td data-value="{entry.subgraph_count}">{entry.subgraph_count:,}</td>
                 <td data-value="{diff_value}">{diff}</td>
             </tr>"""
